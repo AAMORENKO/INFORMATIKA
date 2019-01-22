@@ -114,7 +114,7 @@ __________________________________________________________________________
 		hbk = (HFONT)::GetStockObject(SYSTEM_FONT);
 		hNew = CreateFont(44, 0, 0, 0, FW_NORMAL, 0, 0, 0, ANSI_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, L"Penta");
 		
-		t = "Эта именно ТА САМАЯ фраза";
+		t = "це і є ТА САМА фраза";
 
 		hold = (HFONT)SelectObject(dc, hNew);
 		SetTextColor(dc, c[5]);
@@ -4488,8 +4488,376 @@ private:
 			//if (k < 12) k++; else k = 0;
 		} while (f <= 20);
 
+
+
+
+
+
+
+
+
+
+************************************************************
+resourse.h
 ************************************************************
 
+#define mtime 298
+#define pi 3.14159265358979323846
+
+#define IDR_MENU 501
+
+#define IDM_FILENEW         200
+#define IDM_FILEOPEN        201
+#define IDM_FILESAVE        202
+#define IDM_FILESAVEAS      203
+#define IDM_FILEPRINT       204
+#define IDM_FILEPAGESETUP   205
+#define IDM_FILEPRINTSETUP  206
+#define IDM_FILEEXIT        207
+
+#define IDM_EDITUNDO        210
+#define IDM_EDITCUT         211
+#define IDM_EDITCOPY        212
+#define IDM_EDITPASTE       213
+#define IDM_EDITDELETE      214
+
+#define IDM_HELPCONTENTS    215
+#define IDM_HELPSEARCH      216
+#define IDM_HELPHELP        217
+#define IDM_HELPABOUT       218
+
+#define IDC_EDIT1	1000
+#define IDC_EDIT2	1001
+
+#define IDC_PIC	2000
+#define IDB_BITMAP1	2100
+
+#define IDC_BUTTON1	3000
+#define IDC_E	4000
+
+/*
+
+private:
+
+	COLORREF cf, c[25];
+	HFONT hold, hNew, hbk;
+	HPEN hPenOxy, hOldPen, pen;
+	HBRUSH m, oldm, brush;
+	CPen d, oldd;
+	CBitmap pic;
+	CRect rc, w, kw[30];
+
+	CString ms, t, z;
+
+	int Matrix[50][50];
+	int x1, y1, x2, y2, x3, y3, x4, y4;
+	int RH, RW, k, i, j, p, x, y, cx, cy, dx, dy;
+
+	bool fg;
+
+public:
+	CStatic mpic;
+	CStatic E;
+	int N;
+	int M;
+
+
+	HDC hdc,hdcbt;
+	PAINTSTRUCT pc;
+	HBITMAP PIC;
+	RECT rect;
+	HFONT hFont, hNew, hOldFont;
+	TEXTMETRIC tm;
+	LOGFONT lf;
+	LPTSTR lFace= (LPSTR)"Trebuchet MS";
+	char ms[17]="Це та САМА фраза";
+
+	HWND hButton1;
+	HWND hEditBox1;
+	TCHAR txt[256];
+
+*/
+
+
+
+************************************************************
+ProgramAppDev.rc
+************************************************************
+#include "resource.h"
+
+IDR_MAINFRAME           ICON                    "res\\ProgramAppDev.ico"
+IDB_BITMAP1             BITMAP                  "res\\bitmap1.bmp"
+
+501 MENU 
+BEGIN
+	POPUP "&Файл"
+	BEGIN
+		MENUITEM "&New", IDM_FILENEW
+		MENUITEM "&Open...", IDM_FILEOPEN
+		MENUITEM "&Save", IDM_FILESAVE
+		MENUITEM "Save &as...", IDM_FILESAVEAS
+		MENUITEM SEPARATOR
+		MENUITEM "&Print...", IDM_FILEPRINT
+		MENUITEM "Page se&tup...", IDM_FILEPAGESETUP
+		MENUITEM "P&rinter setup...", IDM_FILEPRINTSETUP
+		MENUITEM SEPARATOR
+		MENUITEM "E&xit", IDM_FILEEXIT
+	END
+
+	POPUP "&Правити"
+	BEGIN
+		MENUITEM "&Undo", IDM_EDITUNDO
+		MENUITEM SEPARATOR
+		MENUITEM "&Cut\tShift+Del", IDM_EDITCUT
+		MENUITEM "&Copy\tCtrl+Ins", IDM_EDITCOPY
+		MENUITEM "&Paste\tShift+Ins", IDM_EDITPASTE
+	END
+
+	POPUP "&Допомога"
+	BEGIN
+		MENUITEM "&Contents\tF1", IDM_HELPCONTENTS
+		MENUITEM "&Search", IDM_HELPSEARCH
+		MENUITEM "&Using help", IDM_HELPHELP
+		MENUITEM SEPARATOR
+		MENUITEM "&About...", IDM_HELPABOUT
+	END
+END
+
+
+
+
+
+
+************************************************************
+program.cpp
+************************************************************
+
+
+#include <windows.h>
+#include <iostream>
+#include "resource.h"
+
+using namespace std;
+
+
+HDC hdc,hdcbt;
+PAINTSTRUCT pc;
+HBITMAP PIC;
+RECT rect;
+HFONT hFont, hNew, hOldFont;
+TEXTMETRIC tm;
+LOGFONT lf;
+LPTSTR lFace= (LPSTR)"Trebuchet MS";
+char ms[17]="Це та САМА фраза";
+
+HWND hButton1;
+HWND hEditBox1;
+TCHAR txt[256];
+
+
+
+    /* Use default icon and mouse-pointer */
+   
+    wincl.hIcon = LoadIcon (NULL, IDI_ASTERISK);
+    wincl.hIconSm = LoadIcon (NULL, IDI_ASTERISK);
+
+   
+    // IDI_HAND
+   // wincl.hIcon = (HICON)LoadImage( hThisInstance,"res\\ProgramAppDev.ico",IMAGE_ICON,32, 32,LR_LOADFROMFILE);
+   // wincl.hIconSm = (HICON)LoadImage( hThisInstance,"res\\ProgramAppDev.ico",IMAGE_ICON,16, 16,LR_LOADFROMFILE);
+ 
+    /* Use Windows's default color as the background of the window */
+    wincl.hbrBackground = (HBRUSH) COLOR_WINDOW;
+
+
+    // menu
+    menu = LoadMenu(hThisInstance, MAKEINTRESOURCE(IDR_MENU));
+    SetMenu(hwnd, menu);
+
+
+    // picture load
+    PIC=(HBITMAP)::LoadImage(hThisInstance,"res\\bitmap1.bmp",IMAGE_BITMAP,100,100,LR_CREATEDIBSECTION | LR_DEFAULTSIZE | LR_LOADFROMFILE);
+    
+    hdc=BeginPaint(hwnd,&pc);
+    GetClientRect(hwnd,&rect);
+        
+    Rectangle (hdc,0,0,799,599);
+    hdcbt=::CreateCompatibleDC(hdc);
+    
+    SelectObject(hdcbt,PIC);
+    BitBlt(hdc,500,300,380,380,hdcbt,0,0,SRCCOPY);
+    
+    
+        
+    // .... TO DO TEXT  memset(&lf,0,sizeof(lf));
+    
+
+    hOldFont = (HFONT)::GetStockObject(SYSTEM_FONT);
+    hNew = CreateFont(44, 0, 0, 0, FW_NORMAL, 0, 0, 0, RUSSIAN_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, lFace);
+
+    SetBkMode(hdc,TRANSPARENT);
+    hFont=(HFONT)SelectObject(hdc, hNew); 
+
+    SetTextColor(hdc,RGB(0,29,128));
+    TextOut(hdc,420,260,ms,17);
+    //DrawText(hdc,ms,17,&rect,DT_SINGLELINE|DT_CENTER|DT_VCENTER);
+    
+    hFont = (HFONT)SelectObject(hdc, hOldFont);   
+    DeleteDC(hdcbt);
+    EndPaint(hwnd,&pc);
+    
+    // Button
+    /*
+    HWND  newCtrl = ::CreateWindow(_T("BUTTON"), _T("кнопочка"),
+    WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP | BS_DEFPUSHBUTTON,
+    xPos, yPos, width, height, hDlg, (HMENU)BUTTON_ID, hInstance, 0);
+    */
+    hButton1 = CreateWindow( 
+    "BUTTON",   // predefined class 
+    "BUTTON1",       // button text 
+    WS_VISIBLE | WS_CHILD | BS_PUSHBUTTON,  // styles 
+ 
+    // Size and position values are given explicitly, because 
+    // the CW_USEDEFAULT constant gives zero values for buttons. 
+    505,         // starting x position 
+    420,         // starting y position 
+    100,        // button width 
+    40,        // button height 
+    hwnd,       // parent window 
+    (HMENU) IDC_BUTTON1,       // menu 
+    (HINSTANCE) GetWindowLong(hwnd, GWL_HINSTANCE), 
+    NULL);      // pointer not needed
+    
+    
+    
+    
+    // EditControl
+    
+    hEditBox1=CreateWindow(
+    "EDIT", 
+    NULL, 
+    WS_VISIBLE | WS_CHILD | WS_BORDER | ES_LEFT, 
+    500, 
+    100, 
+    150, 
+    35, 
+    hwnd, 
+    (HMENU)IDC_EDIT1, 
+    hThisInstance,
+    NULL);    
+    SetDlgItemText(hwnd, IDC_EDIT1, (LPSTR)"12345");
+    
+
+       case WM_CREATE:      
+	  //memset(&lf,0,sizeof(lf));	
+	  //lf.lfHeight=70;
+	  //lstrcpy(lf.lfFaceName,lFace);
+	  //hFont=CreateFontIndirect(&lf);
+	  
+
+	  	
+         break;
+      
+       case WM_KEYDOWN: // работа с клавиатурой, опрос
+	  switch(wParam)
+	  {
+		case VK_ESCAPE: // нажата кнопка ESC
+			DestroyWindow(hwnd);//SendMessage(hwnd,WM_CLOSE,0,0);
+			break;
+	  }
+
+
+             case IDM_FILENEW:
+             case IDM_FILEOPEN:
+             case IDM_FILESAVE:
+             case IDM_FILESAVEAS:
+             case IDM_FILEPRINT:
+             case IDM_FILEPAGESETUP:
+             case IDM_FILEPRINTSETUP:
+
+             case IDM_EDITUNDO:
+             case IDM_EDITCUT:
+             case IDM_EDITCOPY:
+             case IDM_EDITPASTE:
+             case IDM_EDITDELETE:
+                  MessageBox( hwnd, (LPSTR) "Function Not Yet Implemented.",
+                              (LPSTR) szClassName,
+                              MB_ICONINFORMATION | MB_OK );
+                  return 0;
+
+             case IDM_HELPCONTENTS:
+                  WinHelp( hwnd, (LPSTR) "HELPFILE.HLP",
+                           HELP_CONTENTS, 0L );
+                  return 0;
+
+             case IDM_HELPSEARCH:
+                  WinHelp( hwnd, (LPSTR) "HELPFILE.HLP",
+                           HELP_PARTIALKEY, 0L );
+                  return 0;
+
+             case IDM_HELPHELP:
+                  WinHelp( hwnd, (LPSTR) "HELPFILE.HLP",
+                           HELP_HELPONHELP, 0L );
+                  return 0;
+
+             case IDM_FILEEXIT:
+			if( MessageBox( hwnd, (LPSTR) "Realy?",
+                              (LPSTR) "Yes/No",
+                              MB_YESNO | MB_ICONQUESTION )==IDYES) SendMessage( hwnd, WM_CLOSE, 0, 0L );
+                  return 0;
+
+
+             case IDM_HELPABOUT:
+                  MessageBox (NULL, "About..." , "Windows example version 0.01", 1);
+                  return 0;
+                  
+             case IDC_BUTTON1:
+			GetDlgItemText(hwnd, IDC_EDIT1, txt, 256);
+			SetDlgItemText(hwnd, IDC_EDIT1, (LPSTR)"");
+			SetFocus(hEditBox1);
+			MessageBox( hwnd, txt,(LPSTR) "Yes/No",MB_OK | MB_ICONINFORMATION );
+			//MessageBox( hwnd, (LPSTR) "Wayyy? Yes!",(LPSTR) "Yes/No",MB_OK | MB_ICONINFORMATION );
+			SetDlgItemText(hwnd, IDC_EDIT1, (LPSTR)"29");
+                  return 0;   
+    
+             case IDC_EDIT1:
+			GetDlgItemText(hwnd, IDC_EDIT1, txt, 256);
+			SetDlgItemText(hwnd, IDC_EDIT1, (LPSTR)"");
+			SetFocus(hEditBox1);
+			//MessageBox( hwnd, txt,(LPSTR) "Yes/No",MB_OK | MB_ICONINFORMATION );
+                  return TRUE; 
+		    break;		               
+
+ 
+ 
+      case WM_PAINT:
+           hdc=BeginPaint(hwnd,&pc);
+           
+
+	    	    
+	    // .... TO DO
+
+	    EndPaint(hwnd,&pc);          
+           break;
+	  
+      case WM_CLOSE:
+           DeleteObject(hFont);
+	    DestroyWindow( hwnd );
+           return 0;	  
+
+      case WM_LBUTTONDOWN:
+	    //MessageBox(hwnd,(LPSTR)"ddd\nShift",(LPSTR)"xxx!", MB_OK | MB_ICONEXCLAMATION);
+      break;
+
+      case WM_NOTIFY:
+	    MessageBox(hwnd,(LPSTR)"ddd\nShift",(LPSTR)"xxx!", MB_OK | MB_ICONEXCLAMATION);
+      break;
+	  
+
+
+
+
+************************************************************
 
 
 
