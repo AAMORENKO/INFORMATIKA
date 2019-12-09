@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Конструирование форм</title>
+  </head>
+  <body>
+    <div><img src="logo.png" width="28%" align="top"vspace="1%" hspace="29%"/>
+      </div>
+    <form action="test.php" enctype="multipart/form-data" method="post" name="test" target="_blank">
+
+      <fieldset title="Регистрационная информация">
+        <legend title="Регистрационная информация" align="left">
+          Регистрационная информация
+        </legend>
+        <input name="id_user" type="hidden" value="27" />
+        Введите логин:
+        <input type="text" name="Reg_login" maxlength="12" value="< 10 знаков" size="14" />
+        <br />
+        Введите пароль: 
+        <input type="password" name="Reg_password" value="Пароль" />
+        <br />
+      </fieldset>
+
+      <fieldset title="Личная информация">
+        <legend title="Личная информация" align="center">
+          Личная информация
+        </legend>
+        Имя:
+        <input type="text" name="Reg_name" value="Ваше имя" />
+        <br />
+        Фамилия:
+        <input type="text" name="Reg_surname" value="Ваша фамилия" />
+        <br />
+        Отчество:
+        <input type="text" name="Reg_patronymic" value="Ваше отчество" />
+        <br />
+        Ваш пол: 
+        <input name="Reg_Gender" type="radio" value="man" />
+        Мужской
+        <input name="Reg_Gender" type="radio" value="woman" />
+        Женский
+        <input name="Reg_Gender" type="radio" value="dontanswer" checked />
+        Не хочу отвечать
+        <br />
+        Ваш возраст:
+        <input name="Reg_Age" type="radio" value="before18" id="ab18"/>
+        <label for="ab18">до 18</label>
+        <input name="Reg_Age" type="radio" value="1825" id="a1825" />
+        <label for="a1825">18-25</label>
+        <input name="Reg_Age" type="radio" value="2535" id="a2535"/>
+        <label for="a2535">25-35</label>
+        <br />
+        <input name="Reg_Age" type="radio" value="3550" id="a3530"/>
+        <label for="a3530">35-50</label>
+        <input name="Reg_Age" type="radio" value="after50" id="aa50"/>
+        <label for="aa50">старше 50</label>
+        <br />
+      </fieldset>
+
+      <fieldset title="Дополнительная информация">
+        <legend title="Дополнительная информация" align="right">
+          Дополнительная информация
+        </legend>
+        Место проживания:
+        <select name="R_Place" size="1" >
+          <optgroup label="Украина">
+            <option value="Kyev">Киев</option>
+            <option value="Dpua" selected >Днепр</option>
+            <option value="Lviv">Львов</option>
+          </optgroup>
+          <optgroup label="Америка">
+            <option value="LA">Лос-Анджелес</option>
+            <option value="Va">Вашингтон</option>
+            <option value="NY">Нью-Йорк</option>
+          </optgroup>
+          <optgroup label="Франция">
+            <option value="Par">Париж</option>
+            <option value="Lion">Лион</option>
+            <option value="Mars">Марсель</option>
+          </optgroup>
+        </select>
+        <br />
+
+        Области работы (можно выбрать несколько):
+        <br />
+        <select name="R_Job" size="8" multiple="multiple" >
+          <optgroup label="Журналистика">
+            <option value="biz">Бизнес</option>
+            <option value="ecol">Экология</option>
+            <option value="tur">Туризм</option>
+          </optgroup>
+          <optgroup label="Программирование">
+            <option value="web">Web-программирование</option>
+            <option value="CPP">С/С++</option>
+            <option value="Del">Delphi</option>
+          </optgroup>
+          <optgroup label="Создание сайтов">
+            <option value="Diz">Дизайн</option>
+            <option value="Html">Верстка</option>
+          </optgroup>
+          <optgroup label="Перевод">
+            <option value="Eng">Английский</option>
+            <option value="Fr">Французский</option>
+            <option value="Ger">Немецкий</option>
+          </optgroup>
+          <optgroup label="Другое">
+            <option value="HR">Управление персоналом</option>
+            <option value="sale">Продажи</option>
+            <option value="admin">Администрирование</option>
+            <option value="PR">Реклама</option>
+          </optgroup>
+        </select>
+        <br />
+        Увлечения: <input name="Reg_hobby[]" type="checkbox" value="sing" />Петь
+        <input name="Reg_hobby[]" type="checkbox" value="float" />Плавать
+        <input name="Reg_hobby[]" type="checkbox" value="walk" />Гулять
+        <input name="Reg_hobby[]" type="checkbox" value="work" checked />Работать
+        <br />
+        <input name="Reg_hobby[]" type="checkbox" value="drive" checked />Кататься на машине
+        <input name="Reg_hobby[]" type="checkbox" value="cook" />Готовить
+        <input name="Reg_hobby[]" type="checkbox" value="dance" />Танцевать
+        <input name="Reg_hobby[]" type="checkbox" value="read" checked />Читать
+        <br />
+        Добавьте свое фото: <input name="Reg_foto" type="file" size="55" />
+        <br />
+
+        Расскажите немного о себе:
+        <br />
+        <textarea cols="24" rows="10" name="about" wrap="off" >Я самый лучший, лучше меня нет никого.
+        </textarea>
+        <br />
+      </fieldset>
+
+      <fieldset title="Информация о нас">
+        <legend title="Информация о нас" align="center">
+          Информация о нас
+        </legend>
+        Соглашение:
+        <br />
+        <textarea cols="24" rows="3" name="about" readonly >Условия нашего соглашения
+        </textarea>
+        <br />
+      </fieldset>
+<p align="center">
+      <input name="submit" type="submit" value="отправить" align="left" border="1" />
+      <input name="reset" type="reset" value="очистить" align="right" />
+</p>
+    </form>
+  </body>
+</html>
