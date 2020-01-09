@@ -1,0 +1,56 @@
+* { box-sizing: border-box
+}
+body {
+font-size: 1.35em; 
+font-family: 'Nunito', sans-sherif;
+color: #000; 
+background: #e8e9e9; 
+padding-left: 5%; 
+padding-right: 5%;
+}
+
+h1{
+color: #555;
+}
+
+.top-share .top-share-fb{
+background: linear-gradient(to bottom, #4b68b9 0%, #3b55a0 100%);
+color: #fff; 
+text align: center; 
+border-radius: 5px; 
+cursor: pointer;
+}
+
+.top-share .top-share-fb:hover{
+box shadow: 0 -50px 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+.top-share .top-share-fb span
+{ display: inline-block; 
+padding: 10px 0 10px 20px;
+background:url('img/fb-png.jpg') left center no-repeat;
+background-size: 10px;
+}
+
+
+.top-share-text{
+font size: 25px;
+}
+
+
+/* top positions */
+
+
+.top-share .wrap{
+	display: flex;
+	align-items: center;
+}
+
+.top-share .top-sare-fb{
+	flex: 1;
+	margin: 2%;
+}
+
+.top-share-text{
+	flex: 3;
+}
