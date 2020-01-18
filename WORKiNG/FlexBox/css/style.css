@@ -1,0 +1,64 @@
+﻿
+.titles h2{
+	color: #fff;
+	font-size: 2rem;
+	margin: 10px 0;
+	padding-right: 20px;
+	padding-left: 20px;
+}
+
+section.profit{
+	background: #8e8e8e;
+	padding: 15px 0;
+}
+
+section.profit .titles p{
+	color: #dfd;
+	font-size: 1.2rem;
+	padding-right: 20px;
+	padding-left: 20px;
+}
+section.profit .item .subtitle{
+	color: #fff;
+	font-size: 1.5rem;
+	margin: 3px 0;
+}
+
+section.profit .item .text{
+	color: #ccc;
+}
+
+
+nav .logo{
+	color: #191970;
+	background-color: #FFF0B8;
+	padding-right: 2%;
+	padding-left: 2%;
+	float: left;
+}
+
+nav .logo .ltitle{
+	font-size: 24px;
+}
+nav .logo .lsub{
+	font-size: 14px;	
+}
+
+nav menu a{
+	color: #5A30D2;
+	padding: 5px 35px;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+nav menu ul{
+	float: left;
+	margin: 0 5px
+}
+
+nav menu{
+	float: right;
+	overflow: hidden;
+	padding: 20px 0;
+}
+

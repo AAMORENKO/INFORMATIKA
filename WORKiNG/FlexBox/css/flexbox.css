@@ -1,0 +1,57 @@
+﻿/* top positions */
+
+.top-share .wrap{
+	display: flex;
+	align-items: center;
+}
+
+.top-share .top-share-fb{
+	flex: 1;
+	margin-right: 2%;
+}
+
+.top-share-text{
+	flex: 3;
+}
+
+.flex-container{
+	display: inline-flex;
+	flex-wrap: wrap;
+	align-items: center;
+	height: 85px;
+}
+
+.flex-element{
+	display: flex;
+}
+
+section.profit .wrap{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+section.profit .item{
+	max-width: 350px;
+	text-align: center;
+	margin: 20px 0;
+}
+
+section.profit .item-para{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.img-container{
+	display: inline-flex;
+	flex-wrap: wrap;	
+	justify-content: space-around;
+}
+
+.img-element{
+	display: flex;
+	flex:1 3;
+	flex-wrap: wrap;
+
+}
