@@ -1,0 +1,181 @@
+package MainWinG;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+/**
+ * Created by Admin on 03.12.2020.
+ */
+public class MainWinG extends Frame implements
+        WindowListener,MouseListener, MouseMotionListener {
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        dispose();
+        System.exit(0);
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
+    }
+
+    public int x,y,x1,y1,minX,minY,maxX,maxY,RH,RW,dx,dy;
+    public Point toch=null;
+    public Image menu;
+    public Image[] kadr=new Image[15];
+    public int[] kwX=new int[15];
+    public int[] kwY=new int[15];
+
+    public void paint(Graphics g)
+    {
+        Dimension rc=getSize();
+        Insets in=getInsets();
+
+        RH=rc.width;
+        RW=rc.height;
+
+        x=minX=in.left;
+        x1=maxX=RH-in.right;
+        y=minY=in.top;
+        y1=maxY=RW-in.bottom;
+
+        menu=new ImageIcon("res/menu.JPG").getImage();
+        g.drawImage(menu,x,y,null);
+
+
+        kadr[0]=new ImageIcon("res/OKNO-01.JPG").getImage();
+        kadr[1]=new ImageIcon("res/OKNO-02.JPG").getImage();
+        kadr[2]=new ImageIcon("res/OKNO-03.JPG").getImage();
+
+        int x2,y2;
+
+        x2=kwX[0]=x+100; dx=65;
+        y2=kwY[0]=y+350; dy=62;
+
+
+        x2=kwX[1]=x+100; dx=3*65;
+        y2=kwY[1]=y+10; dy= (int) (1.5*62);
+        //g.drawRect(kwX[1],kwY[1],dx,dy);
+
+        x2=kwX[2]=x+150; dx=2*65;
+        y2=kwY[2]=y+500; dy= 62;
+        //g.drawRect(kwX[2],kwY[2],dx,dy);
+
+        Graphics2D g2=(Graphics2D)g;
+        g2.setStroke(new BasicStroke(3.0f));
+        g.setColor(new Color(100, 36, 180));
+
+
+        if(toch!=null)
+        {
+            x2=toch.x;
+            y2=toch.y;
+            for (int k = 0; k <7 ; k++) {
+                if (x2 > kwX[k] &&
+                        x2 < kwX[k] + dx &&
+                        y2 > kwY[k] &&
+                        y2 < kwY[k] + dy) {
+                    //g.drawRect(kwX[k], kwY[k], dx, dy);
+                    g.drawImage(kadr[k],x,y,null);
+                }
+            }
+        }
+
+
+
+    }
+
+    MouseAdapter mouseHandler= new MouseAdapter() {
+        @Override
+        public void mouseMoved(MouseEvent e)
+        {
+            toch=e.getPoint();
+        }
+        @Override
+        public void mouseClicked(MouseEvent e)
+        {
+            toch=e.getPoint();
+            repaint();
+        }
+    };
+
+
+    public MainWinG()
+    {
+        super("10 клас. Математика. Тригонометрія");
+        addWindowListener(this);
+        addMouseListener(mouseHandler);
+        addMouseMotionListener(mouseHandler);
+        setLayout(null);
+        setLocation(200,1);
+        setSize(850,650);
+        show();
+
+        this.setResizable(false);
+        Image icon=new ImageIcon("res/logo.png").getImage();
+        this.setIconImage(icon);
+
+    }
+
+}
