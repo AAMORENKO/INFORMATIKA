@@ -1,0 +1,139 @@
+﻿// Ребус (С) А.А.Дуванов АЗЫ ИНФОРМАТИКИ RU 2002 (01/03/02-07/03/02)
+// ----------------------------------------------------------------
+//       (C) А.А. Русс (художник)
+//
+var rebusRU = new Array(
+"монитор","дисковод","хранение","алгоритм","информация","компьютер","память",
+"кодирование","интернет","дисковод","дискета","клавиатура","программирование",
+"программист","информатика","винчестер","исполнитель","обработка","передача",
+"шифрование","источник","курсор","таблица"
+                       );
+// Высота картинок
+var rebusHeight = new Array(
+170,115,100,170,121,170,170,
+100, 170,170,170,170,76,
+170,120,157,170,170,170,
+170, 80,170,170
+                           );
+
+var screenHRU = 190;         // Высота поля вывода
+var numRebus  = 0;           // Номер текущего ребуса
+var bonusRU   = new Array(); // Бонусы решений
+
+// Начало работы
+// -------------
+function iniRU()
+{
+  // Текущий ребус в 0
+  numRebus = 0;
+  // Текущий выбор в 0
+  document.all['seln'].selectedIndex=0;
+  // Обнулим бонусы
+  for(var i=0; i<rebusRU.length; i++) bonusRU[i]=0;
+  // Обнулим строку ввода
+  document.forma.edstr.value="";
+  // Выведим ребус
+  putRebusRU();
+  // Выведим бонус
+  putBonusRU();
+  // Установим фокус в строку ввода
+  document.all['edstr'].focus();
+}
+
+// Вывод текущего ребуса
+// ---------------------
+function putRebusRU()
+{
+  // Покажем картинку
+  eval("document.all['rebus'].src='./pic/"+numRebus+".gif'")
+  // Подровняем по вертикали
+  document.all['rebus'].style.posTop=(screenHRU-rebusHeight[numRebus])/2;
+}
+
+// Вывод текущего бонуса
+// ---------------------
+function putBonusRU()
+{
+  eval("document.all['bonus'].src='./pic/b"+bonusRU[numRebus]+".gif'")
+}
+
+// Вывод текущего содержимого в строке ввода
+// -----------------------------------------
+function putEdstrRU()
+{
+  var str = bonusRU[numRebus] ? rebusRU[numRebus]:"";
+  document.forma.edstr.value=str;
+}
+
+// Проверка
+// --------
+function puskRU(str)
+{
+    var s="";
+    for(var j=0; j<str.length;j++)
+      if (str.charAt(j) != " ") s += str.charAt(j);
+    bonusRU[numRebus] = s.toLowerCase() == rebusRU[numRebus] ? 1:0;
+    putBonusRU();
+}
+
+// Выбор нового ребуса
+// -------------------
+function caseRebusRU()
+{
+  numRebus = document.all['seln'].selectedIndex;
+  putRebusRU();
+  putEdstrRU();
+  putBonusRU();
+  document.all['edstr'].focus();
+}
+
+// Выбор предыдущего ребуса
+// -------------------
+function prevRU()
+{
+  if(numRebus)
+  {
+    var n = document.all['seln'].selectedIndex;
+    document.all['seln'].selectedIndex=n-1;
+    caseRebusRU();
+  }
+}
+
+// Выбор следующего ребуса
+// -------------------
+function nextRU()
+{
+  if(numRebus < rebusRU.length-1)
+  {
+    var n = document.all['seln'].selectedIndex;
+    document.all['seln'].selectedIndex=n+1;
+    caseRebusRU();
+  }
+}
+
+// Постановка задачи
+// -----------------
+
+function  NewBrouserRU(html, okno)
+{
+  var num;
+  if (NewBrouserRU.arguments.length < 2)
+     num = window.open(html,"","left=100,top=100,width=500,height=400,menubar=1,resizable=1,scrollbars=1");
+  else
+     num = window.open(html,"", okno);
+  return num;
+}
+
+function aboutRU()
+{  
+  window.showModalDialog("about.htm", "", "dialogWidth:360px;dialogHeight:260px;cеnter:yes;help:no;status:no");  
+  
+}
+
+// Пользовательские инструкции
+// ---------------------------
+function helpRU()
+{
+  window.showModalDialog("help.htm", "", "dialogWidth:440px;dialogHeight:360px;cеnter:yes;help:no;status:no");
+
+}

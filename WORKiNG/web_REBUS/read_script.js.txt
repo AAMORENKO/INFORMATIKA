@@ -1,0 +1,9 @@
+﻿function  NewBrouserRU(html, okno)
+{
+  var num;
+  if (NewBrouserRU.arguments.length < 2)
+     num = window.open(html,"","left=100,top=100,width=500,height=400,menubar=1,resizable=1,scrollbars=1");
+  else
+     num = window.open(html,"", okno);
+  return num;
+}
